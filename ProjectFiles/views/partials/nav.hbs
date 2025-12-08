@@ -1,8 +1,17 @@
-<nav class="nav">
-  <a href="/"        class="{{#if (eq active 'home')}}active{{/if}}">Home</a>
-  <a href="/shop"    class="{{#if (eq active 'shop')}}active{{/if}}">Shop</a>
-  <a href="/login"   class="{{#if (eq active 'login')}}active{{/if}}">Login</a>
-  <a href="/about"   class="{{#if (eq active 'about')}}active{{/if}}">About</a>
-  <a href="/checkout"class="{{#if (eq active 'checkout')}}active{{/if}}">Checkout</a>
-  <a href="/userdetails" class="{{#if (eq active 'userdetails')}}active{{/if}}">User</a>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a href="/"        class="nav-item nav-link{{#if (eq active 'home')}}active{{/if}}">Home</a>
+      <a href="/shop"    class="nav-item nav-link{{#if (eq active 'shop')}}active{{/if}}">Shop</a>
+      <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+      <a href="/about"   class="nav-item nav-link{{#if (eq active 'about')}}active{{/if}}">About</a>
+      <a href="/checkout"class="nav-item nav-link{{#if (eq active 'checkout')}}active{{/if}}">Checkout</a>
+      <a href="/userdetails" class="nav-item nav-link{{#if (eq active 'userdetails')}}active{{/if}}{{#if (eq loggedin false)}}disabled{{/if}}">User</a>
+        </div>
+  </div>
 </nav>
