@@ -33,7 +33,4 @@ router.get('/userdetails', (req, res) => {
   res.render('pages/userdetails', { title: 'User Details' });
 });
 
-// optional quick test route
-router.get('/healthz', (req, res) => res.send('ok'));
-
 module.exports = router;
