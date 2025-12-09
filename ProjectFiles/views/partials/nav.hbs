@@ -1,4 +1,4 @@
-
+<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,3 +15,77 @@
         </div>
   </div>
 </nav>
+-->
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">MySite</a>
+
+    <!-- INLINE LINKS (outside the collapse) -->
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-left">
+
+      <!-- Collapses at SM (visible ≥ sm, hidden < sm) -->
+      <li class="nav-item d-none d-sm-block">
+        <a class="nav-link" href="#">Sm Priority</a>
+      </li>
+
+      <!-- Collapses at MD (visible ≥ md, hidden < md) -->
+      <li class="nav-item d-none d-md-block">
+        <a class="nav-link" href="#">Md Priority</a>
+      </li>
+
+      <!-- Collapses at LG (visible ≥ lg, hidden < lg) -->
+      <li class="nav-item d-none d-lg-block">
+        <a class="nav-link" href="#">Lg Priority</a>
+      </li>
+
+      <!-- Always-inline link (never collapses) -->
+      <li class="nav-item">
+        <a class="nav-link" href="#">Always Inline</a>
+      </li>
+    </ul>
+
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <!-- COLLAPSED MENU CONTENT -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+        <!-- Sm Priority: only show in menu when < sm -->
+        <li class="nav-item d-sm-none">
+          <a class="nav-link" href="#">Sm Priority</a>
+        </li>
+
+        <!-- Md Priority: only show in menu when < md -->
+        <li class="nav-item d-md-none">
+          <a class="nav-link" href="#">Md Priority</a>
+        </li>
+
+        <!-- Lg Priority: only show in menu when < lg -->
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="#">Lg Priority</a>
+        </li>
+
+        <!-- Optional: show Always-inline also in menu on mobile if you want -->
+        <li class="nav-item d-lg-none">
+          <a class="nav-link" href="#">Always Inline</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
