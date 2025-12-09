@@ -11,45 +11,57 @@
       <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
       <a href="/about"   class="nav-item nav-link{{#if (eq active 'about')}}active{{/if}}">About</a>
       <a href="/checkout"class="nav-item nav-link{{#if (eq active 'checkout')}}active{{/if}}">Checkout</a>
-      <a href="/userdetails" class="nav-item nav-link{{#if (eq active 'userdetails')}}active{{/if}}{{#if (eq loggedin false)}}disabled{{/if}}">User</a>
         </div>
   </div>
 </nav>
 -->
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">MySite</a>
+  <nav class="navbar bg-light">
+  <div class="container-fluid d-flex align-items-center flex-nowrap">
 
-    <!-- INLINE LINKS (outside the collapse) -->
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-left">
+    
+    <a class="navbar-brand me-3" href="#">EventMaster</a>
 
-      <!-- Collapses at SM (visible ≥ sm, hidden < sm) -->
-      <li class="nav-item d-none d-sm-block">
-        <a class="nav-link" href="#">Sm Priority</a>
-      </li>
+    
+    <ul class="navbar-nav flex-row align-items-center gap-3 flex-nowrap">
 
-      <!-- Collapses at MD (visible ≥ md, hidden < md) -->
-      <li class="nav-item d-none d-md-block">
-        <a class="nav-link" href="#">Md Priority</a>
-      </li>
-
-      <!-- Collapses at LG (visible ≥ lg, hidden < lg) -->
-      <li class="nav-item d-none d-lg-block">
-        <a class="nav-link" href="#">Lg Priority</a>
-      </li>
-
-      <!-- Always-inline link (never collapses) -->
+      <!-- Always-->
       <li class="nav-item">
-        <a class="nav-link" href="#">Always Inline</a>
+        <a href="/"        class="nav-item nav-link{{#if (eq active 'home')}}active{{/if}}">Home</a>
       </li>
+      <li class="nav-item">
+        <a href="/shop"    class="nav-item nav-link{{#if (eq active 'shop')}}active{{/if}}">Shop</a>
+      </li>
+
+      <!-- SM and up -->
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/checkout"class="nav-item nav-link{{#if (eq active 'checkout')}}active{{/if}}">Checkout</a>
+      </li>
+
+      <!-- MD and up -->
+      <li class="nav-item d-none d-md-inline-block">
+        <a href="/about"   class="nav-item nav-link{{#if (eq active 'about')}}active{{/if}}">About</a>
+
+      </li>
+
+      <!-- LG and up -->
+      <li class="nav-item d-none d-lg-inline-block">
+        <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+      </li>
+      <li class="nav-item d-none d-lg-inline-block">
+        <a href="/userdetails"   class="nav-item nav-link {{#if (eq active 'user')}}active{{/if}} {{#if (eq loggedin false)}}disabled{{/if}}">User</a>
+      </li>
+
+      
     </ul>
 
-    <!-- Toggler -->
+    <!-- Spacer to push toggle fully right -->
+    <div class="flex-grow-1"></div>
+
+    <!-- Toggler (RIGHT SIDE) -->
     <button
-      class="navbar-toggler"
+      class="navbar-toggler d-lg-none"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#mainNav"
@@ -59,33 +71,33 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+  </div>
 
+  <!-- COLLAPSED MENU -->
+  <div class="collapse d-lg-none" id="mainNav">
+    <ul class="navbar-nav ms-3 mb-2">
 
-    <!-- COLLAPSED MENU CONTENT -->
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <li class="nav-item d-sm-none">
+        <a href="/checkout"class="nav-item nav-link{{#if (eq active 'checkout')}}active{{/if}}">Checkout</a>
 
-        <!-- Sm Priority: only show in menu when < sm -->
-        <li class="nav-item d-sm-none">
-          <a class="nav-link" href="#">Sm Priority</a>
-        </li>
+      </li>
 
-        <!-- Md Priority: only show in menu when < md -->
-        <li class="nav-item d-md-none">
-          <a class="nav-link" href="#">Md Priority</a>
-        </li>
+      <li class="nav-item d-md-none">
+        <a href="/about"   class="nav-item nav-link{{#if (eq active 'about')}}active{{/if}}">About</a>
+      </li>
 
-        <!-- Lg Priority: only show in menu when < lg -->
-        <li class="nav-item d-lg-none">
-          <a class="nav-link" href="#">Lg Priority</a>
-        </li>
+      <li class="nav-item d-lg-none">
+        <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+      </li>
+      <li class="nav-item d-lg-none">
+        <a href="/userdetails"   class="nav-item nav-link {{#if (eq active 'user')}}active{{/if}} {{#if (eq loggedin false)}}disabled{{/if}}">User</a>
+      </li>
 
-        <!-- Optional: show Always-inline also in menu on mobile if you want -->
-        <li class="nav-item d-lg-none">
-          <a class="nav-link" href="#">Always Inline</a>
-        </li>
-      </ul>
-    </div>
+      <li class="nav-item d-lg-none">
+      </li>
+    </ul>
   </div>
 </nav>
+
+
 
