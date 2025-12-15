@@ -1,7 +1,131 @@
 
     
  <h1>Contact Us</h1>
- <p>You think I'm funny? I amuse you?</p>
+ 
+ <!-- CONTACT SECTION -->
+<section class="container my-5" id="contact">
+  <div class="row g-4 align-items-start">
+    <!-- FORM -->
+    <div class="col-12 col-lg-6">
+      <h2 class="h3 mb-3">Contact the Youth Group</h2>
+      <p class="text-body-secondary mb-4">
+        Drop us a message — we’ll get back to you as soon as we can.
+      </p>
+
+      <!-- Change action to your route, e.g. /contact -->
+      <form action="/contact" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="fullName"
+            name="fullName"
+            placeholder="Jane Doe"
+            required
+            maxlength="80"
+          />
+          <div class="invalid-feedback">Please enter your name.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="jane@example.com"
+            required
+          />
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone (optional)</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            placeholder="+353 86 123 4567"
+            maxlength="25"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="topic" class="form-label">Topic</label>
+          <select class="form-select" id="topic" name="topic" required>
+            <option value="" selected disabled>Choose one…</option>
+            <option value="general">General question</option>
+            <option value="events">Events / nights</option>
+            <option value="transport">Transport</option>
+            <option value="leaders">Leaders / safeguarding</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="invalid-feedback">Please select a topic.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Type your message…"
+            required
+          ></textarea>
+          <div class="invalid-feedback">Please write a message.</div>
+        </div>
+
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" value="yes" id="consent" name="consent" required />
+          <label class="form-check-label" for="consent">
+            I consent to being contacted back about this message.
+          </label>
+          <div class="invalid-feedback">Consent is required to submit.</div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Send message</button>
+        <p class="small text-body-secondary mt-3 mb-0">
+          In emergencies, contact the relevant emergency services.
+        </p>
+      </form>
+    </div>
+
+    <!-- MAP -->
+    <div class="col-12 col-lg-6">
+      <h3 class="h5 mb-3">Find us</h3>
+      <div class="ratio ratio-16x9 rounded overflow-hidden border">
+        <iframe
+          title="Youth group location on Google Maps"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=54.272175,-8.477604&z=15&output=embed"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Bootstrap validation (client-side)
+  (() => {
+    "use strict";
+    const forms = document.querySelectorAll(".needs-validation");
+    Array.from(forms).forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      }, false);
+    });
+  })();
+</script>
+
 
 
 

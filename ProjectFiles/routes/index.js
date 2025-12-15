@@ -26,4 +26,8 @@ router.get('/userdetails', (req, res) => {
   res.render('pages/userdetails', { title: 'User Details' });
 });
 
+router.get('/contact', (req, res) => {
+  res.render('pages/contact', { title: 'Contact' });
+});
+
 module.exports = router;
