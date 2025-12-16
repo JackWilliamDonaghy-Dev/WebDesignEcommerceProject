@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+const { readJsonArray } = require('./helper');
+
+
 router.get('/', (req, res) => {
   res.render('pages/index', { title: 'Home' });
 });
@@ -11,7 +14,8 @@ router.get('/about', (req, res) => {
 });
 
 router.get('/shop', (req, res) => {
-  res.render('pages/shop', { title: 'Shop' });
+  const products = readJsonArray('../data/events.json');
+  res.render("pages/shop", { products, active: "shop" });
 });
 
 router.get('/login', (req, res) => {
