@@ -1,0 +1,59 @@
+:root {
+  --ink:#161616;
+  --ink-soft:rgba(22,22,22,.65);
+  --paper:#faf9f7;
+  --accent:#8b5e3c;
+  --accent-soft:rgba(139,94,60,.12);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.card {
+  border-radius: 22px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+.card.shadow-sm {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08) !important;
+}
+.card::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: var(--accent);
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+}
+
+.btn {
+  border-radius: 14px;
+  padding: 0.6rem 0.9rem;
+}
+
+.btn-primary {
+  background: var(--ink) !important;
+  border-color: var(--ink) !important;
+}
+
+.btn-outline-primary {
+  color: var(--ink) !important;
+  border-color: var(--ink-soft) !important;
+}
+.btn-outline-primary:hover {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent) !important;
+}
+
+.form-control, .form-select {
+  border-radius: 16px;
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem var(--accent-soft);
+}/*# sourceMappingURL=main.css.map */

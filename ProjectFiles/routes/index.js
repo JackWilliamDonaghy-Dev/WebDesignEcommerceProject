@@ -62,7 +62,8 @@ router.post("/checkout", (req, res) => {
   // Basic payment validation
   const cardName = String(req.body.cardname || "").toUpperCase();
   const cardNumber = String(req.body.cardNumber || "").replace(/\s+/g, "");
-
+  const totalCost = checkoutItems.reduce((sum, item) => sum + item.cost, 0);
+  
   const paymentIsValid =
     checkoutItems.length > 0 &&
     (totalCost === 0 || cardNumber.length >= 12) &&
