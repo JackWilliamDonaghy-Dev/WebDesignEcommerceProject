@@ -1,42 +1,61 @@
 
   <h1>{{title}}</h1>
-  <p>Selling tickets for your favorite events</p>
-  <p>from your favorite artists <strong>Ed Sheeran</strong>, <strong>Taylor Swift</strong> and <strong>Beyoncé</strong> and many more!</p>
+  <p>Selling tickets for your favorite Christian Events</p>
+  <p>the greatest collection of Christian events, to bring you to fellowship that you didn't know you needed!</p>
 
-  <h2>Featured Artists</h2>
-  <div class="row">
-    <div class="col-md-4 col-sm-6">
-      <div class="card mb-4 shadow-sm">
-        <img src="images/edsheeran.jpg" class="card-img-top" alt="Ed Sheeran">
-        <div class="card-body">
-          <h5 class="card-title">Ed Sheeran</h5>
-          <p class="card-text">Experience the magic of Ed Sheeran live in concert. Get your tickets now!</p>
-        </div>
+  <h2>Home Events</h2>
+  <section class="container my-4">
+  <div class="row g-3">
+  {{#each events}}
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h3 class="h5 card-title mb-2">{{title}}</h3>
+            <ul class="list-unstyled small text-body-secondary mb-3">
+              <li><strong>Date:</strong> {{date}}</li>
+              <li><strong>Time:</strong> {{time}}</li>
+              <li><strong>Location:</strong> {{location}}</li>
+            </ul>
+          </div>
+        </article>
       </div>
-    </div>
-    <div class="col-md-4 col-sm-6">
-      <div class="card mb-4 shadow-sm">
-        <img src="images/taylorswift.jpg" class="card-img-top" alt="Taylor Swift">
-        <div class="card-body">
-          <h5 class="card-title">Taylor Swift</h5>
-          <p class="card-text">Don't miss Taylor Swift's electrifying performance. Secure your tickets today!</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 col-sm-6">
-      <div class="card mb-4 shadow-sm">
-        <img src="images/beyonce.jpg" class="card-img-top" alt="Beyoncé">
-        <div class="card-body">
-          <h5 class="card-title">Beyoncé</h5>
-          <p class="card-text">Join Beyoncé for an unforgettable night. Buy your tickets now!</p>
-        </div>
-      </div>
-    </div>
+    {{/each}}
   </div>
+</section>
+    <a href="/shop" class="btn btn-primary flex-sm-fill">More Home Events</a>
 
-  <a href="/shop" class="btn btn-primary btn-lg">Browse Events</a>
+<h2>Upcoming Events</h2>
+<section class="container my-4">
+  <div class="row g-3">
+  {{#each otherEvents}}
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h3 class="h5 card-title mb-2">{{title}}</h3>
+            <ul class="list-unstyled small text-body-secondary mb-3">
+              <li><strong>Date:</strong> {{date}}</li>
+              <li><strong>Time:</strong> {{time}}</li>
+              <li><strong>Location:</strong> {{location}}</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    {{/each}}
+  </div>
+</section>
+    <a href="/shop" class="btn btn-primary flex-sm-fill">More Upcoming Events</a>
 
+<h2>How you can help</h2>
+<p>We are always looking for volunteers to help us organize and run our events. If you are interested in volunteering, please contact us at <a href="/contact">Contact Us</a>.</p>
+<p>also if you have any Christian events to share, please let us know!</p>
 
+<h2>Mission statement</h2>
+<p>Our mission is to bring the Christian community together through events that foster fellowship and spiritual growth.</p>
+<p>We believe that by coming together in worship and fellowship, we can strengthen our faith and build a stronger community.</p>
+<p>We are committed to providing a safe and welcoming environment for all Christians to come together and grow in their faith.</p>
 
-
-
+<h3>About us</h3>
+<p>We are a group of passionate Christians who believe in the power of community and fellowship. We started this website to help connect Christians with events that can help them grow in their faith and build relationships with other believers.</p>
+<p>We are dedicated to providing a platform that makes it easy for Christians to find and attend events in their area.</p>
+<p>Thank you for visiting our website, and we look forward to seeing you at one of our events!</p>
+<p>To see more check out the about us page - <a href="/about">About Us</a></p>

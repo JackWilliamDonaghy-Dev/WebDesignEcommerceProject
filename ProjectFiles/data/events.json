@@ -5,8 +5,8 @@
     "date": "Sat 25 Oct",
     "time": "7:30pm",
     "location": "Bangor",
-    "info": "Ages 16–24. Bring a friend. Limited seats available.",
-    "image": "/images/events/event-1.jpg"
+    "info": "Ages 16-24. Bring a friend. Limited seats available.",
+    "image": "images/event-1.jpg"
   },
   {
     "id": "ev002",
@@ -15,6 +15,123 @@
     "time": "8:00pm",
     "location": "Sligo",
     "info": "Open to all. Doors 7:30pm.",
-    "image": "/images/events/event-2.jpg"
+    "image": "images/event-2.jpg"
+  },
+  {
+    "id": "ev003",
+    "title": "Spring Praise Gathering",
+    "date": "Sat 14 Feb",
+    "time": "7:00pm",
+    "location": "Letterkenny",
+    "info": "Ages 16-25. Worship and short message.",
+    "image": "images/event-3.jpg"
+  },
+  {
+    "id": "ev004",
+    "title": "Faith & Fellowship Night",
+    "date": "Fri 6 Mar",
+    "time": "8:00pm",
+    "location": "Donegal",
+    "info": "Open to all. Tea and snacks provided.",
+    "image": "images/event-4.jpg"
+  },
+  {
+    "id": "ev005",
+    "title": "Easter Worship Service",
+    "date": "Sun 5 Apr",
+    "time": "6:30pm",
+    "location": "Sligo",
+    "info": "Celebrating Easter together. All welcome.",
+    "image": "images/event-5.jpg"
+  },
+  {
+    "id": "ev006",
+    "title": "Youth Worship & Word",
+    "date": "Sat 18 Apr",
+    "time": "7:30pm",
+    "location": "Bundoran",
+    "info": "Ages 15-22. Bring a Bible.",
+    "image": "images/event-6.jpg"
+  },
+  {
+    "id": "ev007",
+    "title": "Summer Praise Night",
+    "date": "Fri 15 May",
+    "time": "8:00pm",
+    "location": "Sligo",
+    "info": "Outdoor worship weather permitting.",
+    "image": "images/event-7.jpg"
+  },
+  {
+    "id": "ev008",
+    "title": "Acoustic Worship Evening",
+    "date": "Sat 30 May",
+    "time": "7:00pm",
+    "location": "Collooney",
+    "info": "Relaxed acoustic set. Limited seating.",
+    "image": "images/event-8.jpg"
+  },
+  {
+    "id": "ev009",
+    "title": "Prayer & Praise Night",
+    "date": "Fri 12 Jun",
+    "time": "7:30pm",
+    "location": "Ballymote",
+    "info": "A quiet evening of prayer and worship.",
+    "image": "images/event-9.jpg"
+  },
+  {
+    "id": "ev010",
+    "title": "Youth Summer Gathering",
+    "date": "Sat 27 Jun",
+    "time": "6:00pm",
+    "location": "Rosses Point",
+    "info": "Games, worship, and food after.",
+    "image": "images/event-10.jpg"
+  },
+  {
+    "id": "ev011",
+    "title": "Late Night Worship",
+    "date": "Fri 10 Jul",
+    "time": "9:00pm",
+    "location": "Sligo",
+    "info": "Reflective worship night. Candles provided.",
+    "image": "images/event-11.jpg"
+  },
+  {
+    "id": "ev012",
+    "title": "Faith Stories Evening",
+    "date": "Sat 25 Jul",
+    "time": "7:30pm",
+    "location": "Enniscrone",
+    "info": "Testimonies and worship. Open mic.",
+    "image": "images/event-12.jpg"
+  },
+  {
+    "id": "ev013",
+    "title": "Autumn Praise Rally",
+    "date": "Sat 12 Sep",
+    "time": "7:00pm",
+    "location": "Castlebar",
+    "info": "Regional worship night. Coaches available.",
+    "image": "images/event-13.jpg"
+  },
+  {
+    "id": "ev014",
+    "title": "Harvest Thanksgiving",
+    "date": "Fri 9 Oct",
+    "time": "7:30pm",
+    "location": "Sligo",
+    "info": "Celebrating God's provision together.",
+    "image": "images/event-14.jpg"
+  },
+  {
+    "id": "ev015",
+    "title": "Christmas Praise Night",
+    "date": "Fri 18 Dec",
+    "time": "8:00pm",
+    "location": "Sligo",
+    "info": "Carols, worship, and festive treats.",
+    "image": "images/event-15.jpg"
   }
 ]

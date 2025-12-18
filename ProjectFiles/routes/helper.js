@@ -8,6 +8,7 @@ function readJsonArray(filePath) {
 
     const raw = fs.readFileSync(filePath, "utf8");
     const parsed = JSON.parse(raw);
+    console.log("JSON read successfully:", parsed);
 
     return Array.isArray(parsed) ? parsed : [];
   } catch (err) {
