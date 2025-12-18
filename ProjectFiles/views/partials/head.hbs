@@ -3,7 +3,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Home page">
 <meta name="author" content="ATU Sligo">
+
+<title>EventMaster</title>
+
+<meta name="description" content="{{#if meta.description}}{{meta.description}}{{else}}{{site.defaultDescription}}{{/if}}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{site.name}}">
+<meta property="og:title" content="{{title}} | {{site.name}}">
+<meta property="og:description" content="{{#if meta.description}}{{meta.description}}{{else}}{{site.defaultDescription}}{{/if}}">
+<meta property="og:url" content="{{site.url}}{{#if meta.path}}{{meta.path}}{{else}}{{/if}}">
+<meta property="og:image" content="{{site.url}}{{#if meta.image}}{{meta.image}}{{else}}{{site.defaultImage}}{{/if}}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{title}} | {{site.name}}">
+<meta name="twitter:description" content="{{#if meta.description}}{{meta.description}}{{else}}{{site.defaultDescription}}{{/if}}">
+<meta name="twitter:image" content="{{site.url}}{{#if meta.image}}{{meta.image}}{{else}}{{site.defaultImage}}{{/if}}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="stylesheets/style.css">
-<title>Home</title>
 </head>

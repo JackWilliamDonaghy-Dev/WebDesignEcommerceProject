@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+// For JSON reading and writing
+const { readJsonArray, writeJsonArray } = require('./helper');
+
 //Cart functions/routes
 function getCart(req){ if(!req.session.cart) req.session.cart=[]; return req.session.cart; }
 function setFlash(req, key, val){ req.session[key] = val; }
@@ -41,7 +44,6 @@ router.post("/checkout", (req, res) => {
   const orders = readJsonArray("data/orders.json");
   const cart = req.session.cart || [];
 
-  // Build checkout items
   const checkoutItems = cart.map(cartItem => {
     const event = events.find(e => e.id === cartItem.id);
     if (!event) return null;
@@ -50,20 +52,14 @@ router.post("/checkout", (req, res) => {
     const quantity = cartItem.qty;
     const cost = price * quantity;
 
-    return {
-      id: event.id,
-      title: event.title,
-      price,
-      quantity,
-      cost
-    };
+    return { id: event.id, title: event.title, price, quantity, cost };
   }).filter(Boolean);
 
-  // Basic payment validation
+  const totalCost = checkoutItems.reduce((sum, item) => sum + item.cost, 0);
+
   const cardName = String(req.body.cardname || "").toUpperCase();
   const cardNumber = String(req.body.cardNumber || "").replace(/\s+/g, "");
-  const totalCost = checkoutItems.reduce((sum, item) => sum + item.cost, 0);
-  
+
   const paymentIsValid =
     checkoutItems.length > 0 &&
     (totalCost === 0 || cardNumber.length >= 12) &&
@@ -75,11 +71,11 @@ router.post("/checkout", (req, res) => {
       active: "checkout",
       items: checkoutItems,
       total: totalCost,
-      paymentFailure: true
+      paymentFailure: true,
+      meta:{ description:"Secure checkout for event tickets.", path:"/checkout", robots:"noindex,nofollow" }
     });
   }
 
-  // Build order object
   const newOrder = {
     orderId: "ord_" + Date.now(),
     createdAt: new Date().toISOString(),
@@ -95,48 +91,57 @@ router.post("/checkout", (req, res) => {
     total: totalCost
   };
 
-  // Save order
   orders.push(newOrder);
   writeJsonArray("data/orders.json", orders);
 
-  // Clear cart after success
   req.session.cart = [];
 
   res.render("pages/checkout", {
-    title: "Checkout",
+    title: "Order Complete",
     active: "checkout",
     items: [],
     total: 0,
-    paymentSuccess: true
+    paymentSuccess: true,
+    meta:{ description:"Your order has been successfully completed.", path:"/checkout", robots:"noindex,nofollow" }
   });
 });
-
-// For JSON reading and writing
-const { readJsonArray } = require('./helper');
-const { writeJsonArray } = require('./helper');
-
 
 router.get('/', (req, res) => {
   const events = readJsonArray('data/events.json').slice(0, 3);
   const otherEvents = readJsonArray('data/events.json').slice(3, 6);
-  res.render("pages/index", { title: 'Home', events, otherEvents, active: "index" });
+  res.render("pages/index", {
+    title: 'Home',
+    events,
+    otherEvents,
+    active: "index",
+    meta:{ description:"Discover upcoming events and nights. Book tickets easily for yourself or groups.", path:"/" }
+  });
 });
 
 router.get('/about', (req, res) => {
-  res.render('pages/about', { title: 'About' });
+  res.render('pages/about', {
+    title: 'About',
+    active: "about",
+    meta:{ description:"Learn about our event ticket platform and how we support local gatherings.", path:"/about" }
+  });
 });
 
 router.get("/shop", (req, res) => {
   const products = readJsonArray("data/events.json");
   const lastAddedId = takeFlash(req, "lastAddedId");
-  res.render("pages/shop", { products, active: "shop", lastAddedId });
+  res.render("pages/shop", {
+    title: "Shop",
+    products,
+    active: "shop",
+    lastAddedId,
+    meta:{ description:"Shop event tickets. Add single or group tickets to your cart and checkout securely.", path:"/shop" }
+  });
 });
-
 
 //Login Routes
 router.get("/login", (req, res) => {
   const returnTo = req.query.returnTo || req.get("Referrer") || "/";
-  res.render("pages/login", { title: "Login", returnTo, active: "login" });
+  res.render("pages/login", { title: "Login", returnTo, active: "login", meta:{ robots:"noindex,nofollow" } });
 });
 
 router.post("/login", (req, res) => {
@@ -144,10 +149,10 @@ router.post("/login", (req, res) => {
   const users = readJsonArray("data/users.json");
 
   const user = users.find(u => u.email.toLowerCase() === String(email).toLowerCase() && u.password === password);
-  if(!user) return res.status(401).render("pages/login", { title: "Login", active: "login", error: "The username or password you entered is incorrect.", returnTo: returnTo || "/" });
+  if(!user) return res.status(401).render("pages/login", { title: "Login", active: "login", error: "The username or password you entered is incorrect.", returnTo: returnTo || "/", meta:{ robots:"noindex,nofollow" } });
 
   req.session.loggedIn = true;
-    req.session.user = {
+  req.session.user = {
     id: user.id,
     email: user.email,
     firstname: user.firstname || "",
@@ -163,15 +168,15 @@ router.post("/login", (req, res) => {
 
 router.get("/register", (req, res) => {
   const returnTo = req.query.returnTo || req.get("Referrer") || "/";
-  res.render("pages/register", { title: "Register", active: "login", returnTo });
+  res.render("pages/register", { title: "Register", active: "login", returnTo, meta:{ robots:"noindex,nofollow" } });
 });
 
 router.post("/register", (req, res) => {
   const { firstname, lastname, email, password, password2, returnTo } = req.body;
   const users = readJsonArray("data/users.json");
 
-  if(password !== password2) return res.status(400).render("pages/register", { title: "Register", active: "login", error: "Passwords do not match.", returnTo: returnTo || "/", firstname, lastname, email });
-  if(users.some(u => u.email.toLowerCase() === String(email).toLowerCase())) return res.status(400).render("pages/register", { title: "Register", active: "login", error: "Email already registered. Try logging in.", returnTo: returnTo || "/", firstname, lastname });
+  if(password !== password2) return res.status(400).render("pages/register", { title: "Register", active: "login", error: "Passwords do not match.", returnTo: returnTo || "/", firstname, lastname, email, meta:{ robots:"noindex,nofollow" } });
+  if(users.some(u => u.email.toLowerCase() === String(email).toLowerCase())) return res.status(400).render("pages/register", { title: "Register", active: "login", error: "Email already registered. Try logging in.", returnTo: returnTo || "/", firstname, lastname, meta:{ robots:"noindex,nofollow" } });
 
   const newUser = { id: "u_" + Date.now(), firstname, lastname, email, password };
   users.push(newUser);
@@ -189,8 +194,6 @@ router.get("/logout", (req, res) => {
   res.redirect(returnTo);
 });
 
-
-
 router.get("/checkout", (req, res) => {
   const products = readJsonArray("data/events.json");
   const cart = req.session.cart || [];
@@ -204,24 +207,25 @@ router.get("/checkout", (req, res) => {
 
   const total = items.reduce((sum, it) => sum + it.lineTotal, 0);
 
-  console.log("CART:", req.session.cart);
-  console.log("ITEMS:", items);
-  res.render("pages/checkout", { title: "Checkout", active: "checkout", items, total });
+  res.render("pages/checkout", {
+    title: "Checkout",
+    active: "checkout",
+    items,
+    total,
+    meta:{ description:"Secure checkout for event tickets.", path:"/checkout", robots:"noindex,nofollow" }
+  });
 });
-
 
 //User Details Routes
 router.get("/userdetails", (req, res) => {
-  if (!req.session.loggedIn || !req.session.user?.id) {
-    return res.redirect("/login?returnTo=/userdetails");
-  }
+  if (!req.session.loggedIn || !req.session.user?.id) return res.redirect("/login?returnTo=/userdetails");
 
   const users = readJsonArray("data/users.json");
   const userFromJson = users.find(u => u.id === req.session.user.id);
 
   if (userFromJson) {
     req.session.user = {
-      ...req.session.user,   // keep email, id, etc.
+      ...req.session.user,
       firstname: userFromJson.firstname || "",
       lastname: userFromJson.lastname || "",
       dob: userFromJson.dob || "",
@@ -231,14 +235,11 @@ router.get("/userdetails", (req, res) => {
     };
   }
 
-  res.render("pages/userdetails", { title: "User Details", active: "userdetails" });
+  res.render("pages/userdetails", { title: "User Details", active: "userdetails", meta:{ robots:"noindex,nofollow" } });
 });
 
-
 router.post("/userdetails", (req, res) => {
-  if (!req.session.loggedIn || !req.session.user?.id) {
-    return res.redirect("/login?returnTo=/userdetails");
-  }
+  if (!req.session.loggedIn || !req.session.user?.id) return res.redirect("/login?returnTo=/userdetails");
 
   const { firstname, lastname, dob, address1, address2, address3 } = req.body;
   const users = readJsonArray("data/users.json");
@@ -250,15 +251,11 @@ router.post("/userdetails", (req, res) => {
   writeJsonArray("data/users.json", users);
 
   req.session.user = { ...req.session.user, firstname, lastname, dob, address1, address2, address3 };
-
   res.redirect("/userdetails");
 });
 
-
-
-
 router.get("/contact", (req, res) => {
-  res.render("pages/contact", { title: "Contact", active: "contact", submitted: false });
+  res.render("pages/contact", { title: "Contact", active: "contact", submitted: false, meta:{ robots:"noindex,nofollow" } });
 });
 
 //For Form Submission
@@ -272,7 +269,8 @@ router.post("/contact", (req, res) => {
     fullName,
     email,
     topic,
-    message
+    message,
+    meta:{ robots:"noindex,nofollow" }
   });
 });
 

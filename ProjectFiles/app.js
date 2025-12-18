@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs');
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -27,6 +26,17 @@ app.use((req, res, next) => {
   res.locals.cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
   next();
 });
+
+app.use((req,res,next)=>{
+  res.locals.site={
+    name:"EventHub",
+    url:"http://localhost:3000",
+    defaultDescription:"Browse and book tickets for local events, worship nights, and gatherings. Simple checkout for single or group bookings.",
+    defaultImage:"/images/og-default.jpg"
+  };
+  next();
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
