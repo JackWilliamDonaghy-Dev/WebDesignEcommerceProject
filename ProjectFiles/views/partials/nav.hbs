@@ -18,7 +18,7 @@
       </li>
       <!-- SM and up -->
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/checkout"class="nav-item nav-link{{#if (eq active 'checkout')}}active{{/if}}">Checkout</a>
+        <a href="/checkout"class="nav-item nav-link{{#if (eq active 'checkout')}}active{{/if}}">Checkout{{#if cartCount}} <span class="badge bg-primary">{{cartCount}}</span>{{/if}}</a>
       </li>
       <!-- MD and up -->
       <li class="nav-item d-none d-md-inline-block">
@@ -29,7 +29,11 @@
       </li>
       <!-- LG and up -->
       <li class="nav-item d-none d-lg-inline-block">
-        <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+        {{#if loggedIn}}
+          <a href="/logout" class="nav-link nav-link{{#if (eq active 'logout')}}active{{/if}}">Logout</a>
+        {{else}}
+          <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+        {{/if}}
       </li>
       <li class="nav-item d-none d-lg-inline-block">
         <a href="/userdetails"   class="nav-item nav-link {{#if (eq active 'user')}}active{{/if}} {{#if (eq loggedin false)}}disabled{{/if}}">User</a>
@@ -70,7 +74,11 @@
         <a href="/contact"   class="nav-item nav-link{{#if (eq active 'contact')}}active{{/if}}">Contact</a>
       </li>
       <li class="nav-item d-lg-none">
-        <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+        {{#if loggedIn}}
+          <a href="/logout" class="nav-link nav-link{{#if (eq active 'logout')}}active{{/if}}">Logout</a>
+        {{else}}
+          <a href="/login"   class="nav-item nav-link{{#if (eq active 'login')}}active{{/if}}">Login</a>
+        {{/if}}
       </li>
       <li class="nav-item d-lg-none">
         <a href="/userdetails"   class="nav-item nav-link {{#if (eq active 'user')}}active{{/if}} {{#if (eq loggedin false)}}disabled{{/if}}">User</a>

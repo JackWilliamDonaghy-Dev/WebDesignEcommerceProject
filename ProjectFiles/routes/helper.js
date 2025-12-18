@@ -1,27 +1,28 @@
+
 const fs = require("fs");
+const path = require("path");
 
-function readJsonArray(filePath) {
-  try {
-    if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, "[]", "utf8");
-    }
+// resolve paths from project root (NOT /routes)
+function resolvePath(relPath) {
+  return path.join(process.cwd(), relPath);
+}
 
-    const raw = fs.readFileSync(filePath, "utf8");
-    const parsed = JSON.parse(raw);
-    console.log("JSON read successfully:", parsed);
-
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (err) {
-    console.error("JSON read error:", err);
-    return [];
+function readJsonArray(relPath) {
+  const fullPath = resolvePath(relPath);
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`File not found: ${fullPath}`);
   }
+  const raw = fs.readFileSync(fullPath, "utf-8");
+  if (!raw.trim()) return [];
+  return JSON.parse(raw);
 }
 
-function writeJsonArray(filePath, data) {
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+function writeJsonArray(relPath, arr) {
+  const fullPath = resolvePath(relPath);
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`File not found: ${fullPath}`);
+  }
+  fs.writeFileSync(fullPath, JSON.stringify(arr, null, 2), "utf-8");
 }
 
-module.exports = {
-  readJsonArray,
-  writeJsonArray
-};
+module.exports = { readJsonArray, writeJsonArray };

@@ -1,45 +1,37 @@
-    <h1>User Details</h1>
-    <div>    
-   
-            <form name="userdetails" id="udetails" action="" method="get">
-             
-           
-                    <div class="form-group">
-                        <label for="getFirstName">First name</label>
-                        <input type="text" class="form-control" id="firstNameID" name="firstname" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="getLastName">Last name</label> 
-                        <input type="text" class="form-control" id="lastNameID" name="lastname" required>
-                    </div>    
-                    <div class="form-group">
-                        <label for="getDOB">Date of Birth</label> 
-                        <input type="date" class="form-control" id="dobID" name="dob" required>
-                    </div>  
-                 
-                
-        
-    
-                        <label for="address1ID">Address 1</label> 
-                        <input type="text" class="form-control" id="address1ID" name="address1" required>
-          
-    
-                        <label for="address2ID">Address 2</label> 
-                        <input type="text" class="form-control" id="address2ID" name="address2" required>
-                 
-            
-                        <label for="address3ID">Address 3</label> 
-                        <input type="text" class="form-control" id="address3ID" name="address3" required>
-                
-              
-         
-                    <input type='submit' value="Update My Details">
-    
-            </form>
+<form name="userdetails" id="udetails" action="/userdetails" method="POST">
+  <div class="form-group">
+    <label for="firstNameID">First name</label>
+    <input type="text" class="form-control" id="firstNameID" name="firstname" value="{{user.firstname}}" required>
+  </div>
 
+  <div class="form-group">
+    <label for="lastNameID">Last name</label>
+    <input type="text" class="form-control" id="lastNameID" name="lastname" value="{{user.lastname}}" required>
+  </div>
 
-   
-    </div>   
+  <div class="form-group">
+    <label for="dobID">Date of Birth</label>
+    <input type="date" class="form-control" id="dobID" name="dob" value="{{user.dob}}" required>
+  </div>
 
+  <label for="address1ID">Address 1</label>
+  <input type="text" class="form-control" id="address1ID" name="address1" value="{{user.address1}}" required>
 
+  <label for="address2ID">Address 2</label>
+  <input type="text" class="form-control" id="address2ID" name="address2" value="{{user.address2}}" required>
 
+  <label for="address3ID">Address 3</label>
+  <input type="text" class="form-control" id="address3ID" name="address3" value="{{user.address3}}" required>
+
+  <button type="submit" class="btn btn-primary mt-3">Update My Details</button>
+</form>
+{{#if success}}
+  <div class="alert alert-success mt-3" role="alert">
+    Your details have been updated successfully.
+  </div>
+{{/if}} 
+{{#if error}}
+  <div class="alert alert-danger mt-3" role="alert">
+    There was an error updating your details. Please try again.
+  </div>
+{{/if}}

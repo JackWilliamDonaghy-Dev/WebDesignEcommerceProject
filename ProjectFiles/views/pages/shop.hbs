@@ -10,12 +10,24 @@
               <li><strong>Date:</strong> {{date}}</li>
               <li><strong>Time:</strong> {{time}}</li>
               <li><strong>Location:</strong> {{location}}</li>
+              <li><strong>Price:</strong>{{#if price}}€{{price}}{{else}}Free{{/if}}</li>
             </ul>
             <p class="card-text small mb-3">{{info}}</p>
             <div class="mt-auto">
               <div class="d-grid gap-2 d-sm-flex">
-                <a href="#" class="btn btn-outline-primary flex-sm-fill">Group</a>
-                <a href="#" class="btn btn-primary flex-sm-fill">Single</a>
+                <div class="mt-auto">
+                  {{#if (eq ../lastAddedId id)}}<div class="alert alert-success py-1 px-2 small mb-2" role="alert">Added to cart ✅</div>{{/if}}
+
+                  <div class="d-grid gap-2 d-sm-flex">
+                    <form method="POST" action="/cart/add" class="flex-sm-fill"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="qty" value="1"><button type="submit" class="btn btn-primary w-100">Single</button></form>
+                    <button type="button" class="btn btn-outline-primary flex-sm-fill w-100" data-group-toggle="{{id}}">Group</button>
+                  </div>
+
+                  <form method="POST" action="/cart/add" class="mt-2 d-none" id="groupForm-{{id}}">
+                    <div class="input-group"><input type="hidden" name="id" value="{{id}}"><input type="number" name="qty" min="2" value="2" class="form-control"><button type="submit" class="btn btn-outline-success">Add</button></div>
+                    <div class="form-text">Enter tickets (2+)</div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -24,3 +36,12 @@
     {{/each}}
   </div>
 </section>
+<script>
+document.addEventListener("click", e => {
+  const btn = e.target.closest("[data-group-toggle]"); if (!btn) return;
+  const id = btn.getAttribute("data-group-toggle");
+  const f = document.getElementById("groupForm-" + id);
+  if (f) f.classList.toggle("d-none");
+});
+</script>
+

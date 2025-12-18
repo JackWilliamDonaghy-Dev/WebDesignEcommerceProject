@@ -1,58 +1,77 @@
+<section class="container my-4">
+  <div class="row g-4">
 
-    <h1>Checkout</h1>
-    <div>    
-        <div> 
-          <form name="checkout" id="user-checkout" action="" method="get">
-                <fieldset>
-                    <legend>Delivery Details</legend>
-                   
-                        <label for="getFirstName">First name</label>
-                        <input type="text"  id="getFirstName" name="firstname" value="firstname" required>
-                 
-                  
-                        <label for="getLastName">Last name</label> 
-                        <input type="text" c id="getLastName" name="lastname" value="surname" required>
-                
-                   
-                        <label for="getAddress1">Addresss</label> 
-                        <input type="text"  id="getAddress1" name="address2" value="address 1" required>
-              
-                  
-                        <label for="getAddress2">Addresss</label> 
-                        <input type="text" id="getAddress2" name="address2"  value="address 2"  required>
-                   
-                  
-                        <label for="getAddress3">Addresss</label> 
-                        <input type="text"  id="getAddress3" name="address3"  value="address 3"  required>
-                
-              
-                <fieldset>
-                    <legend>Payment Details</legend>
+    <div class="col-12 col-lg-6">
+      <h1 class="mb-3">Checkout</h1>
 
-                        <label for="getCardName">Card Name</label> 
-                        <input type="text" id="cardName" name="cardname" value="MR FIRSTNAME SURNAME" required>
-             
-                        <label for="getCardNumber">Card Number</label> 
-                        <input type="text" id="cardNumber" name="cardNumber" value="1234 5678 9102 3456" required>
-                   
-                        <label for="getCardCVC">CVC</label> 
-                        <input type="password" " id="cardCvv" name="cardCvv"  required>
-                </fieldset>    
-                <div id="payment-success" role="alert">
-                    Thank you for your purchase. You will receive delivery details via email. Please return to our <a href="/shop">Shopping Page</a>.
-                </div>
-                <div  id="payment-failure" role="alert">
-                  There seems to be a problem with the card details you entered.
-                </div>                
-                <div>
-                    <input type='submit' class="btn btn-primary" id="buy-now" name="buy-now" value="Buy Now">
-                </div>
-            </form>
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <h2 class="h4 mb-0">Your Cart</h2>
+        {{#if items.length}}<form method="POST" action="/cart/clear" class="m-0"><button type="submit" class="btn btn-sm btn-outline-danger">Clear cart</button></form>{{/if}}
+      </div>
 
+      {{#if items.length}}
+        <div class="table-responsive mb-3">
+          <table class="table table-sm align-middle">
+            <thead><tr><th scope="col">Event</th><th scope="col">Price</th><th scope="col">Qty</th><th scope="col">Cost</th></tr></thead>
+            <tbody>
+              {{#each items}}<tr><td>{{title}}</td><td>{{#if price}}€{{price}}{{else}}Free{{/if}}</td><td>{{qty}}</td><td>€{{lineTotal}}</td></tr>{{/each}}
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between fw-bold"><span>Total</span><span>€{{total}}</span></div>
+        <div class="small text-body-secondary mt-1">All prices include any applicable fees.</div>
+      {{else}}
+        <div class="alert alert-secondary">Your cart is empty. <a href="/shop">Go to Shop</a></div>
+      {{/if}}
 
-        </div> 
-    </div>   
+      {{#unless loggedIn}}<div class="alert alert-info mt-3 mb-0">Want auto-fill? <a href="/login?returnTo=/checkout">Login</a> or <a href="/userdetails">add your details</a>.</div>{{/unless}}
+    </div>
 
+    <div class="col-12 col-lg-6">
+    {{#if paymentSuccess}}
+        <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="h4 mb-2">✅ Payment completed</h2>
+            <p class="mb-2">Thanks, {{user.firstname}}. Your order is being processed.</p>
+            <ul class="mb-3">
+            <li><strong>Status:</strong> Paid</li>
+            <li><strong>Delivery:</strong> Confirmation sent and tickets will be provided for the event.</li>
+            </ul>
+            <a href="/shop" class="btn btn-primary w-100">Back to Shop</a>
+        </div>
+        </div>
+    {{else}}
+        <form name="checkout" id="user-checkout" action="/checkout" method="POST" class="card shadow-sm">
+        <div class="card-body">
+          <fieldset class="mb-4">
+            <legend class="h5 mb-3">Delivery Details</legend>
+            <div class="row g-3">
+              <div class="col-12 col-md-6"><label for="getFirstName" class="form-label">First name</label><input type="text" class="form-control" id="getFirstName" name="firstname" value="{{user.firstname}}" required></div>
+              <div class="col-12 col-md-6"><label for="getLastName" class="form-label">Last name</label><input type="text" class="form-control" id="getLastName" name="lastname" value="{{user.lastname}}" required></div>
+              <div class="col-12"><label for="getAddress1" class="form-label">Address 1</label><input type="text" class="form-control" id="getAddress1" name="address1" value="{{user.address1}}" required></div>
+              <div class="col-12 col-md-6"><label for="getAddress2" class="form-label">Address 2</label><input type="text" class="form-control" id="getAddress2" name="address2" value="{{user.address2}}"></div>
+              <div class="col-12 col-md-6"><label for="getAddress3" class="form-label">Address 3</label><input type="text" class="form-control" id="getAddress3" name="address3" value="{{user.address3}}"></div>
+            </div>
+          </fieldset>
 
+          <fieldset class="mb-3">
+            <legend class="h5 mb-3">Payment Details</legend>
+            <div class="row g-3">
+              <input type="text" class="form-control text-uppercase" id="cardName" name="cardname" value="{{#if loggedIn}}MR {{user.firstname}} {{user.lastname}}{{/if}}" required>
+              <div class="col-12 col-md-8"><label for="cardNumber" class="form-label">Card Number</label><input type="text" class="form-control" id="cardNumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9102 3456" required></div>
+              <div class="col-12 col-md-4"><label for="cardCvv" class="form-label">CVC</label><input type="password" class="form-control" id="cardCvv" name="cardCvv" inputmode="numeric" autocomplete="cc-csc" required></div>
+            </div>
+          </fieldset>
 
+          {{#if paymentSuccess}}<div class="alert alert-success mt-3" role="alert">Thank you for your purchase. You will receive delivery details via email. Please return to our <a href="/shop">Shopping Page</a>.</div>{{/if}}
+          {{#if paymentFailure}}<div class="alert alert-danger mt-3" role="alert">There seems to be a problem with the card details you entered.</div>{{/if}}
 
+            <button type="submit" class="btn btn-primary w-100 mt-2" id="buy-now" name="buy-now" {{#unless items.length}}disabled{{/unless}}>Buy Now</button>
+            {{#unless items.length}}<div class="small text-body-secondary mt-2">Add items to your cart to continue.</div>{{/unless}}
+        </div>
+        </form>
+    {{/if}}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "u_1766056290670",
+    "firstname": "jack",
+    "lastname": "donaghy",
+    "email": "jackzemaster@gmail.com",
+    "password": "hello"
+  },
+  {
+    "id": "u_1766059017258",
+    "firstname": "jack",
+    "lastname": "donaghy",
+    "email": "randomguy@gmail.com",
+    "password": "hi",
+    "dob": "2005-06-14",
+    "address1": "hello",
+    "address2": "over",
+    "address3": "there"
+  }
+]

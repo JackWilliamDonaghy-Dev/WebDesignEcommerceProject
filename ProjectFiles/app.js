@@ -5,10 +5,28 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs');
 
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+//Session setup
+var session = require("express-session");
+app.use(session({
+  secret: "change-this-secret",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use((req, res, next) => {
+  res.locals.loggedIn = !!req.session.loggedIn;
+  res.locals.user = req.session.user || {};
+  // make cart count available globally
+    const cart = req.session.cart || [];
+  res.locals.cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,6 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

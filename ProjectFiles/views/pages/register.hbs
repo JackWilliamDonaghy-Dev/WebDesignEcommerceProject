@@ -1,0 +1,12 @@
+<h1>Register</h1>
+{{#if error}}<div class="alert alert-danger" role="alert">{{error}}</div>{{/if}}
+
+<form name="register" id="user-register" method="POST" action="/register">
+  <input type="hidden" name="returnTo" value="{{returnTo}}">
+  <div class="form-group"><label for="firstNameID">First name</label><input type="text" class="form-control" id="firstNameID" name="firstname" value="{{firstname}}" required></div>
+  <div class="form-group mt-2"><label for="lastNameID">Last name</label><input type="text" class="form-control" id="lastNameID" name="lastname" value="{{lastname}}" required></div>
+  <div class="form-group mt-2"><label for="emailID">Email</label><input type="email" class="form-control" id="emailID" name="email" value="{{email}}" required></div>
+  <div class="form-group mt-2"><label for="passID">Password</label><input type="password" class="form-control" id="passID" name="password" required></div>
+  <div class="form-group mt-2"><label for="pass2ID">Confirm Password</label><input type="password" class="form-control" id="pass2ID" name="password2" required></div>
+  <div class="mt-3"><button class="btn btn-primary" type="submit">Create Account</button> <a class="btn btn-outline-secondary" href="/login?returnTo={{returnTo}}">Back to Login</a></div>
+</form>
